@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👨‍👩‍👧‍👦 Family Board
 
-## Getting Started
+家族で気軽にメッセージを共有できる掲示板アプリです。  
+Next.js × Firebase を使って開発中。
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 技術スタック
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **フロントエンド**: Next.js (App Router) + TypeScript + Tailwind CSS
+- **認証**: Firebase Authentication（Googleログイン）
+- **データベース**: Firestore（NoSQL）
+- **デプロイ予定**: Vercel
+- **環境構築**: `create-next-app --app` テンプレート使用
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔑 機能（実装済）
 
-## Learn More
+- [x] Googleアカウントでログイン / ログアウト
+- [x] メッセージ投稿フォーム（Firestoreに保存）
+- [x] 投稿者情報（名前・UID）も保存
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧪 今後の予定（ToDo）
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [ ] 投稿一覧の表示（リアルタイム取得）
+- [ ] 投稿削除 / 編集機能
+- [ ] 管理者のみ投稿削除できるように
+- [ ] スマホでも見やすいUI調整
+- [ ] Vercelへの公開
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 スクリーンショット
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+（ここに画像を貼る予定）
+
+---
+
+## 📂 ディレクトリ構成（抜粋）
+src/
+├── app/
+│   └── page.tsx          // メイン画面
+├── firebase/
+│   ├── config.ts         // Firebase初期化
+│   └── auth.ts           // ログイン・ログアウト処理
+
+---
+
+## 👤 作者
+
+- kei（@ksk3gogodayo）
+- React × TypeScriptでWebアプリ開発中
+- 他のアプリ： [health-log-app-pro](https://github.com/ksk3gogodayo/health-log-app-pro)
+
+---
+
+## 📅 更新履歴
+
+- 2025-06-18：Firebase認証＋Firestore投稿連携完了 🌱
