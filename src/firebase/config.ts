@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, browserPopupRedirectResolver } from "firebase/auth";
+import {
+  browserPopupRedirectResolver,
+  initializeAuth,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -13,8 +16,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// ✅ ポップアップ専用に強制設定！
-export const auth = getAuth(app, {
+// ✅ initializeAuth を使って resolver を渡す
+export const auth = initializeAuth(app, {
   popupRedirectResolver: browserPopupRedirectResolver,
 });
 
