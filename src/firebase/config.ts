@@ -12,7 +12,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+//const app = initializeApp(firebaseConfig);
 
 export const app = initializeApp(firebaseConfig); // ←これに export をつけてる？
 export const auth = getAuth(app); // ← ポップアップリゾルバ不要
