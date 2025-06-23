@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState, } from 'react';
+// import { onAuthStateChanged } from 'firebase/auth';  // ❌ これではなくimport { auth } from '@/firebase/config';
+import { auth } from '@/firebase/config'; // ✅ auth を共通化！
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/config';
 import { signInWithGoogle, logout } from '@/firebase/auth';
 import { User } from 'firebase/auth';
 import { addDoc ,collection, serverTimestamp } from 'firebase/firestore';
@@ -12,9 +13,14 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // ログイン済み
+    } else {
+      // 未ログイン
+    }
+  });
+  
     return () => unsubscribe();
   }, []);
 
