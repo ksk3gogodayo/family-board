@@ -1,6 +1,6 @@
 // src/firebase/auth.ts
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { auth } from "./config";
+import { auth } from "./config"; // ✅ config.ts から使う！
 
 const provider = new GoogleAuthProvider();
 
@@ -9,9 +9,9 @@ export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider);
     return result.user;
   } catch (error) {
-    console.error("ログインエラー:",error);
+    console.error("ログインエラー:", error);
     throw error;
-    }
+  }
 };
 
 export const logout = async () => {
