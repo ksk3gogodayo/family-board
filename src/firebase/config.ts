@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAj8KEnF-MmzmY3EhJpPHVPXq8xplTPNG4",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "family-board-cde8b.firebaseapp.com",
   projectId: "family-board-cde8b",
   storageBucket: "family-board-cde8b.firebasestorage.app",
