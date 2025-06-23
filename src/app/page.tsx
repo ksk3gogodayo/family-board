@@ -25,8 +25,8 @@ export default function Home() {
       text: message,
       createdAt: serverTimestamp(),
       user: {
-        uid: user.uid,
-        name: user?.displayName,
+        uid: user?.uid || '',
+        name: user?.displayName || '',
       },
     });
     setMessage('');
