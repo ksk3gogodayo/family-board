@@ -1,8 +1,6 @@
+// ✅ initializeAuth をやめて getAuth に戻す
 import { initializeApp } from "firebase/app";
-import {
-  browserPopupRedirectResolver,
-  initializeAuth,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,9 +14,5 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// ✅ initializeAuth を使って resolver を渡す
-export const auth = initializeAuth(app, {
-  popupRedirectResolver: browserPopupRedirectResolver,
-});
-
+export const auth = getAuth(app); // ← ポップアップリゾルバ不要
 export const db = getFirestore(app);
