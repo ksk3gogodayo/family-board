@@ -15,12 +15,13 @@ export default function Home() {
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
+      setUser(user); // ✅ これを追加！
       // ログイン済み
     } else {
       // 未ログイン
     }
   });
-  
+
     return () => unsubscribe();
   }, []);
 
