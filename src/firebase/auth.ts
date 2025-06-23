@@ -1,6 +1,9 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import { app } from '@/firebase/config'; // ✅ エイリアス指定で正しく参照
 
+export { login as signInWithGoogle };
+
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
