@@ -1,5 +1,5 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { app } from './firebase';
+import { app } from '@/firebase/config'; // ✅ エイリアス指定で正しく参照
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
