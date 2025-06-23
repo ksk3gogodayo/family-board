@@ -14,5 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+export const app = initializeApp(firebaseConfig); // ←これに export をつけてる？
 export const auth = getAuth(app); // ← ポップアップリゾルバ不要
 export const db = getFirestore(app);
