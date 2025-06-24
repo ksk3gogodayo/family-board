@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, completeLogin } from '@/firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase/firebase'; // 👈 authのパスは環境に合わせて
 
 export default function Home() {
   const router = useRouter();
@@ -14,7 +16,16 @@ export default function Home() {
         if (user) {
           router.push('/board');
         } else {
-          setChecked(true);
+          // fallback: detect via auth state
+          const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+            if (authUser) {
+              console.log('✅ fallback user from auth:', authUser);
+              router.push('/board');
+            } else {
+              setChecked(true);
+            }
+            unsubscribe(); // 登録解除
+          });
         }
       })
       .catch((error) => {
