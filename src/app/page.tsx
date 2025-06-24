@@ -26,12 +26,16 @@ export default function Home() {
   if (!checked) return null;
 
   return (
-    <button
-      onClick={() => {
-        login();
-      }}
-    >
-      Googleでログイン
-    </button>
+    <>
+      <button
+        onClick={() => {
+          console.log('login関数実行');
+          login();
+        }}
+      >
+        Googleでログイン
+      </button>
+      <p>ログイン状態のチェックが完了しました。コンソールログを確認してください。</p>
+    </>
   );
 }
