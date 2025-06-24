@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, completeLogin } from '@/firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebase/firebase'; // 👈 authのパスは環境に合わせて
+import { auth } from '@/firebase/auth';
 
 export default function Home() {
   const router = useRouter();
