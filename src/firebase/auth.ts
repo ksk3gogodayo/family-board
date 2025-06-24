@@ -1,31 +1,40 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { app } from '@/firebase/config'; // ✅ エイリアス指定で正しく参照
-
-export { login as signInWithGoogle };
-
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithRedirect,   // ← 追加
+  getRedirectResult,    // ← 追加
+  signOut,
+} from 'firebase/auth';
+import { app } from '@/firebase/config';
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+/** ① サインインを開始（Google へリダイレクト） */
 export const login = async () => {
+  console.log('ログイン処理開始');
+  await signInWithRedirect(auth, provider);
+  return null; // 仮に null を返すことで undefined 対策
+};
+
+/** ② リダイレクトから戻って来たときに呼び、ユーザーを確定 */
+export const completeLogin = async () => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    console.log('ログイン成功:', result.user);
-    return result.user;
+    const result = await getRedirectResult(auth);
+    console.log('リダイレクト結果:', result);
+    if (result?.user) {
+      console.log('ログイン成功:', result.user);
+      return result.user;
+    }
+    console.log('ログイン未完了またはキャンセルされました');
+    return null;          // まだ未ログイン
   } catch (error) {
-    console.error('ログイン失敗:', error);
+    console.error('リダイレクトログイン処理でエラー:', error);
+    return null;
   }
 };
 
-export const logout = async () => {
-  try {
-    await signOut(auth);
-    console.log('ログアウト成功');
-  } catch (error) {
-    console.error('ログアウト失敗:', error);
-  }
-};
+export const logout = () => signOut(auth);
 
-export const getCurrentUser = () => {
-  return auth.currentUser;
-};
+/** 現在認証されているユーザーを返す。未ログインの場合は null。 */
+export const getCurrentUser = () => auth.currentUser;
