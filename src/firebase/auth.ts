@@ -1,8 +1,8 @@
 import {
   getAuth,
   GoogleAuthProvider,
-  signInWithRedirect,   // ← 追加
-  getRedirectResult,    // ← 追加
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
 } from 'firebase/auth';
 import { app } from '@/firebase/config';
@@ -14,7 +14,7 @@ const provider = new GoogleAuthProvider();
 export const login = async () => {
   console.log('ログイン処理開始');
   await signInWithRedirect(auth, provider);
-  return null; // 仮に null を返すことで undefined 対策
+  return null;
 };
 
 /** ② リダイレクトから戻って来たときに呼び、ユーザーを確定 */
@@ -27,7 +27,7 @@ export const completeLogin = async () => {
       return result.user;
     }
     console.log('ログイン未完了またはキャンセルされました');
-    return null;          // まだ未ログイン
+    return null;
   } catch (error) {
     console.error('リダイレクトログイン処理でエラー:', error);
     return null;
@@ -38,3 +38,6 @@ export const logout = () => signOut(auth);
 
 /** 現在認証されているユーザーを返す。未ログインの場合は null。 */
 export const getCurrentUser = () => auth.currentUser;
+
+// 👇 これが今回必要！
+export { auth };
