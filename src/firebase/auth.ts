@@ -13,12 +13,7 @@ const provider = new GoogleAuthProvider();
 /** ① サインインを開始（Google へリダイレクト） */
 export const login = async () => {
   console.log('ログイン処理開始');
-
-  const redirectUrl =
-    process.env.NEXT_PUBLIC_REDIRECT_URL ??
-    'http://localhost:3000/auth/callback'; // ローカルでも動くようにフォールバック
-
-  await signInWithRedirect(auth, provider, redirectUrl);
+  await signInWithRedirect(auth, provider); // ← 第3引数は削除
   return null;
 };
 
