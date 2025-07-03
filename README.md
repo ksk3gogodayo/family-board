@@ -105,3 +105,5 @@ src/
 ## 📅 更新履歴
 
 - 2025-06-18：Firebase認証＋Firestore投稿連携完了 🌱
+
+- 2025-07-03：Googleログイン処理での不具合対応中（`getRedirectResult` → callback.tsx 分離検討）
