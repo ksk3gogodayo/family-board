@@ -21,6 +21,7 @@ export const login = async () => {
 export const completeLogin = async () => {
   try {
     const result = await getRedirectResult(auth);
+    console.log('🔍 redirect result:', result);
     console.log('リダイレクト結果:', result);
     if (result?.user) {
       console.log('ログイン成功:', result.user);
