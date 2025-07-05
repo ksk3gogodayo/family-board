@@ -1,7 +1,7 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/firebase/firebaseAuth";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase/firebaseAuth";
 
@@ -20,17 +20,15 @@ export default function Home() {
       }
     });
 
-    return () => unsubscribe();
-  }, []);
+    return () => unsubscribe(); // クリーンアップ
+  }, []); // ← 依存配列に [] を入れて初回だけ実行！
 
-  if (!checked) return null;
+  if (!checked) return <p>ログイン確認中です...</p>;
 
   return (
-    <>
-      <button onClick={login}>Googleでログイン</button>
-      <p>
-        ログイン状態のチェックが完了しました。未ログインの場合は上のボタンからどうぞ。
-      </p>
-    </>
+    <div>
+      <h1>ようこそ Family Board！</h1>
+      <button onClick={() => router.push("/auth")}>ログイン</button>
+    </div>
   );
 }
