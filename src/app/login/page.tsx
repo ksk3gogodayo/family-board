@@ -6,8 +6,8 @@ import { auth } from "@/firebase/firebaseAuth";
 export default function LoginPage() {
   useEffect(() => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider); // ←ちゃんと呼び出し！
+    signInWithRedirect(auth, provider); // ← ✅ ここでリダイレクト
   }, []);
 
-  return <p>Googleに飛ばしてるで〜</p>;
+  return <p>Googleにリダイレクト中...</p>;
 }

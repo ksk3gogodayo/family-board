@@ -4,23 +4,27 @@ import { useRouter } from "next/navigation";
 import { getRedirectResult } from "firebase/auth";
 import { auth } from "@/firebase/firebaseAuth";
 
-export default function CallbackPage() {
+export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const doLogin = async () => {
-      const result = await getRedirectResult(auth);
-      if (result?.user) {
-        console.log("✅ ログイン成功:", result.user);
-        router.push("/board");
-      } else {
-        console.log("❌ ログイン結果なし");
-        router.push("/");
+    const fetchResult = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result?.user) {
+          console.log("ログイン成功:", result.user);
+          // ログイン後のページに遷移
+          router.replace("/");
+        } else {
+          console.log("ログイン結果なし（手動キャンセルなど）");
+        }
+      } catch (error) {
+        console.error("リダイレクト後エラー:", error);
       }
     };
 
-    doLogin();
-  }, []);
+    fetchResult();
+  }, [router]);
 
-  return <p>ログイン処理中...</p>;
+  return <p>Authページ（テスト）</p>;
 }
