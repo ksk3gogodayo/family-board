@@ -1,26 +1,15 @@
 "use client";
-console.log(
-  "🔥 クライアントログ:",
-  process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-);
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/firebase/auth";
+import { login } from "@/firebase/firebaseAuth";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, completeLogin } from "@/firebase/auth";
+import { auth } from "@/firebase/firebaseAuth";
 
 export default function Home() {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    // 🔍 リダイレクトの戻りをチェック
-    completeLogin().then((user) => {
-      if (user) {
-        router.push("/board");
-      }
-    });
-
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("✅ ログイン済みユーザー検出:", user);
