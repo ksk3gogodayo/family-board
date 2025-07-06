@@ -1,37 +1,22 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  signOut,
-} from "firebase/auth"; // ✅これは Firebase公式のパッケージimport { app } from "@/firebase/config";
+import { getAuth, GoogleAuthProvider, signOut } from "firebase/auth"; // ✅これは Firebase公式のパッケージimport { app } from "@/firebase/config";
 import { app } from "@/firebase/config"; // ✅ ← これでOKになるはず！
+import { signInWithPopup } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-/** ① サインインを開始（Google へリダイレクト） */
 export const login = async () => {
-  console.log("ログイン処理開始");
-  await signInWithRedirect(auth, provider);
-  return null;
-};
-
-/** ② リダイレクトから戻って来たときに呼び、ユーザーを確定 */
-export const completeLogin = async () => {
   try {
-    const result = await getRedirectResult(auth);
-    console.log("🔍 redirect result:", result);
-    console.log("リダイレクト結果:", result);
-    if (result?.user) {
-      console.log("ログイン成功:", result.user);
-      return result.user;
+    console.log("ログイン開始");
+    const result = await signInWithPopup(auth, provider);
+    console.log("ログイン成功:", result.user);
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      console.error("Firebaseエラー:", error.message, error.code);
+    } else {
+      console.error("不明なエラー:", error);
     }
-    console.log("ログイン未完了またはキャンセルされました");
-    return null;
-  } catch (error) {
-    console.error("リダイレクトログイン処理でエラー:", error);
-    return null;
   }
 };
 
