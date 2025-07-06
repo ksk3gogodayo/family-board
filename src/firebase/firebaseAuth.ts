@@ -13,11 +13,7 @@ const provider = new GoogleAuthProvider();
 /** ① サインインを開始（Google へリダイレクト） */
 export const login = async () => {
   console.log("ログイン処理開始");
-  await signInWithRedirect(
-    auth,
-    provider,
-    "https://family-board-zeta.vercel.app/auth/callback"
-  );
+  await signInWithRedirect(auth, provider);
   return null;
 };
 
