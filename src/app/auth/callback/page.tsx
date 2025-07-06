@@ -11,6 +11,7 @@ export default function AuthCallbackPage() {
     const fetchResult = async () => {
       try {
         const result = await getRedirectResult(auth);
+        console.log("🌟リダイレクト結果:", result);
         if (result?.user) {
           console.log("ログイン成功:", result.user);
           // ログイン後のページに遷移
